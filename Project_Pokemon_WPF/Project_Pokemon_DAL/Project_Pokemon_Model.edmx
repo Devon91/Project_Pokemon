@@ -1,0 +1,1370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Project_Pokemon_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Attack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="BaseDamage" Type="int" Nullable="false" />
+          <Property Name="Accuracy" Type="int" Nullable="false" />
+          <Property Name="Pp" Type="int" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Found">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaxLevel" Type="int" Nullable="false" />
+          <Property Name="MinLevel" Type="int" Nullable="false" />
+          <Property Name="EncounterRate" Type="numeric" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="PokedexId" Type="int" Nullable="false" />
+          <Property Name="AreaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CatchRateMultiplier" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="SellPrice" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="BuyPrice" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="HealAmount" Type="int" />
+        </EntityType>
+        <EntityType Name="Npc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Dialog" Type="text" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Pokedollar" Type="int" />
+          <Property Name="AreaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NpcItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="NpcId" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OwnedPokemonAttack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CurrentPp" Type="int" Nullable="false" />
+          <Property Name="PokemonId" Type="int" Nullable="false" />
+          <Property Name="AttackId" Type="int" Nullable="false" />
+          <Property Name="KnownAttack" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PlayedTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Pokedollar" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerPokedex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Encountered" Type="bit" Nullable="false" />
+          <Property Name="Caught" Type="bit" Nullable="false" />
+          <Property Name="PokedexId" Type="int" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerPokemon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Height" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Weight" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Xp" Type="int" Nullable="false" />
+          <Property Name="PokemonId" Type="int" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="InParty" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pokedex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PokedexEntry" Type="int" Nullable="false" />
+          <Property Name="AvgHeight" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="AvgWeight" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ImgReference" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CatchRate" Type="int" Nullable="false" />
+          <Property Name="BaseExperience" Type="int" Nullable="false" />
+          <Property Name="EvolveLevel" Type="int" />
+          <Property Name="BaseHp" Type="int" Nullable="false" />
+          <Property Name="BaseAttack" Type="int" Nullable="false" />
+          <Property Name="BaseDefense" Type="int" Nullable="false" />
+          <Property Name="BaseSpecialAttack" Type="int" Nullable="false" />
+          <Property Name="BaseSpecialDefense" Type="int" Nullable="false" />
+          <Property Name="BaseSpeed" Type="int" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pokemon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="Hp" Type="int" Nullable="false" />
+          <Property Name="CurrentHp" Type="int" Nullable="false" />
+          <Property Name="Attack" Type="int" Nullable="false" />
+          <Property Name="Defense" Type="int" Nullable="false" />
+          <Property Name="SpecialAttack" Type="int" Nullable="false" />
+          <Property Name="SpecialDefense" Type="int" Nullable="false" />
+          <Property Name="Speed" Type="int" Nullable="false" />
+          <Property Name="PokedexId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PokemonAttack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequiredLevel" Type="int" Nullable="false" />
+          <Property Name="PokedexId" Type="int" Nullable="false" />
+          <Property Name="AttackId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrainerPokemon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PokemonId" Type="int" Nullable="false" />
+          <Property Name="NpcId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TypeEffectiveId" Type="int" />
+          <Property Name="TypeNotEffectiveId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Attack_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Attack" Type="Self.Attack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attack">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Found_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Found" Type="Self.Found" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Found">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Found_Pokedex">
+          <End Role="Pokedex" Type="Self.Pokedex" Multiplicity="1" />
+          <End Role="Found" Type="Self.Found" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokedex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Found">
+              <PropertyRef Name="PokedexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Npc_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Npc" Type="Self.Npc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Npc">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NpcItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="NpcItem" Type="Self.NpcItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NpcItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NpcItem_Npc">
+          <End Role="Npc" Type="Self.Npc" Multiplicity="1" />
+          <End Role="NpcItem" Type="Self.NpcItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Npc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NpcItem">
+              <PropertyRef Name="NpcId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OwnedPokemonAttack_Attack">
+          <End Role="Attack" Type="Self.Attack" Multiplicity="1" />
+          <End Role="OwnedPokemonAttack" Type="Self.OwnedPokemonAttack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attack">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OwnedPokemonAttack">
+              <PropertyRef Name="AttackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OwnedPokemonAttack_Pokemon">
+          <End Role="Pokemon" Type="Self.Pokemon" Multiplicity="1" />
+          <End Role="OwnedPokemonAttack" Type="Self.OwnedPokemonAttack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokemon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OwnedPokemonAttack">
+              <PropertyRef Name="PokemonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="PlayerItem" Type="Self.PlayerItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerItem_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="PlayerItem" Type="Self.PlayerItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerItem">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerPokedex_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="PlayerPokedex" Type="Self.PlayerPokedex" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerPokedex">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerPokedex_Pokedex">
+          <End Role="Pokedex" Type="Self.Pokedex" Multiplicity="1" />
+          <End Role="PlayerPokedex" Type="Self.PlayerPokedex" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokedex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerPokedex">
+              <PropertyRef Name="PokedexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerPokemon_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="PlayerPokemon" Type="Self.PlayerPokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerPokemon">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerPokemon_Pokemon">
+          <End Role="Pokemon" Type="Self.Pokemon" Multiplicity="1" />
+          <End Role="PlayerPokemon" Type="Self.PlayerPokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokemon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerPokemon">
+              <PropertyRef Name="PokemonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pokedex_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Pokedex" Type="Self.Pokedex" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pokedex">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pokemon_Pokedex">
+          <End Role="Pokedex" Type="Self.Pokedex" Multiplicity="1" />
+          <End Role="Pokemon" Type="Self.Pokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokedex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pokemon">
+              <PropertyRef Name="PokedexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PokemonAttack_Attack">
+          <End Role="Attack" Type="Self.Attack" Multiplicity="1" />
+          <End Role="PokemonAttack" Type="Self.PokemonAttack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attack">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PokemonAttack">
+              <PropertyRef Name="AttackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PokemonAttack_Pokedex">
+          <End Role="Pokedex" Type="Self.Pokedex" Multiplicity="1" />
+          <End Role="PokemonAttack" Type="Self.PokemonAttack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokedex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PokemonAttack">
+              <PropertyRef Name="PokedexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrainerPokemon_Npc">
+          <End Role="Npc" Type="Self.Npc" Multiplicity="1" />
+          <End Role="TrainerPokemon" Type="Self.TrainerPokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Npc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TrainerPokemon">
+              <PropertyRef Name="NpcId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrainerPokemon_Pokemon">
+          <End Role="Pokemon" Type="Self.Pokemon" Multiplicity="1" />
+          <End Role="TrainerPokemon" Type="Self.TrainerPokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokemon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TrainerPokemon">
+              <PropertyRef Name="PokemonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeEffectiveId_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Type1" Type="Self.Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Type1">
+              <PropertyRef Name="TypeEffectiveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeNotEffectiveId_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Type1" Type="Self.Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Type1">
+              <PropertyRef Name="TypeNotEffectiveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Project_Pokemon_ModelStoreContainer">
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="Attack" EntityType="Self.Attack" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="Found" EntityType="Self.Found" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="Npc" EntityType="Self.Npc" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="NpcItem" EntityType="Self.NpcItem" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="OwnedPokemonAttack" EntityType="Self.OwnedPokemonAttack" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="Player" EntityType="Self.Player" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="PlayerItem" EntityType="Self.PlayerItem" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="PlayerPokedex" EntityType="Self.PlayerPokedex" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="PlayerPokemon" EntityType="Self.PlayerPokemon" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="Pokedex" EntityType="Self.Pokedex" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="Pokemon" EntityType="Self.Pokemon" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="PokemonAttack" EntityType="Self.PokemonAttack" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="TrainerPokemon" EntityType="Self.TrainerPokemon" Schema="Pokemon" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="Pokemon" store:Type="Tables" />
+          <AssociationSet Name="FK_Attack_Type" Association="Self.FK_Attack_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Attack" EntitySet="Attack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Found_Area" Association="Self.FK_Found_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Found" EntitySet="Found" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Found_Pokedex" Association="Self.FK_Found_Pokedex">
+            <End Role="Pokedex" EntitySet="Pokedex" />
+            <End Role="Found" EntitySet="Found" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Npc_Area" Association="Self.FK_Npc_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Npc" EntitySet="Npc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NpcItem_Item" Association="Self.FK_NpcItem_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="NpcItem" EntitySet="NpcItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NpcItem_Npc" Association="Self.FK_NpcItem_Npc">
+            <End Role="Npc" EntitySet="Npc" />
+            <End Role="NpcItem" EntitySet="NpcItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OwnedPokemonAttack_Attack" Association="Self.FK_OwnedPokemonAttack_Attack">
+            <End Role="Attack" EntitySet="Attack" />
+            <End Role="OwnedPokemonAttack" EntitySet="OwnedPokemonAttack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OwnedPokemonAttack_Pokemon" Association="Self.FK_OwnedPokemonAttack_Pokemon">
+            <End Role="Pokemon" EntitySet="Pokemon" />
+            <End Role="OwnedPokemonAttack" EntitySet="OwnedPokemonAttack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerItem_Item" Association="Self.FK_PlayerItem_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="PlayerItem" EntitySet="PlayerItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerItem_Player" Association="Self.FK_PlayerItem_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="PlayerItem" EntitySet="PlayerItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerPokedex_Player" Association="Self.FK_PlayerPokedex_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="PlayerPokedex" EntitySet="PlayerPokedex" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerPokedex_Pokedex" Association="Self.FK_PlayerPokedex_Pokedex">
+            <End Role="Pokedex" EntitySet="Pokedex" />
+            <End Role="PlayerPokedex" EntitySet="PlayerPokedex" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerPokemon_Player" Association="Self.FK_PlayerPokemon_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="PlayerPokemon" EntitySet="PlayerPokemon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerPokemon_Pokemon" Association="Self.FK_PlayerPokemon_Pokemon">
+            <End Role="Pokemon" EntitySet="Pokemon" />
+            <End Role="PlayerPokemon" EntitySet="PlayerPokemon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pokedex_Type" Association="Self.FK_Pokedex_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Pokedex" EntitySet="Pokedex" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pokemon_Pokedex" Association="Self.FK_Pokemon_Pokedex">
+            <End Role="Pokedex" EntitySet="Pokedex" />
+            <End Role="Pokemon" EntitySet="Pokemon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PokemonAttack_Attack" Association="Self.FK_PokemonAttack_Attack">
+            <End Role="Attack" EntitySet="Attack" />
+            <End Role="PokemonAttack" EntitySet="PokemonAttack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PokemonAttack_Pokedex" Association="Self.FK_PokemonAttack_Pokedex">
+            <End Role="Pokedex" EntitySet="Pokedex" />
+            <End Role="PokemonAttack" EntitySet="PokemonAttack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrainerPokemon_Npc" Association="Self.FK_TrainerPokemon_Npc">
+            <End Role="Npc" EntitySet="Npc" />
+            <End Role="TrainerPokemon" EntitySet="TrainerPokemon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrainerPokemon_Pokemon" Association="Self.FK_TrainerPokemon_Pokemon">
+            <End Role="Pokemon" EntitySet="Pokemon" />
+            <End Role="TrainerPokemon" EntitySet="TrainerPokemon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeEffectiveId_Type" Association="Self.FK_TypeEffectiveId_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Type1" EntitySet="Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeNotEffectiveId_Type" Association="Self.FK_TypeNotEffectiveId_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Type1" EntitySet="Type" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Project_Pokemon_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Founds" Relationship="Self.FK_Found_Area" FromRole="Area" ToRole="Found" />
+          <NavigationProperty Name="Npcs" Relationship="Self.FK_Npc_Area" FromRole="Area" ToRole="Npc" />
+        </EntityType>
+        <EntityType Name="Attack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BaseDamage" Type="Int32" Nullable="false" />
+          <Property Name="Accuracy" Type="Int32" Nullable="false" />
+          <Property Name="Pp" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_Attack_Type" FromRole="Attack" ToRole="Type" />
+          <NavigationProperty Name="OwnedPokemonAttacks" Relationship="Self.FK_OwnedPokemonAttack_Attack" FromRole="Attack" ToRole="OwnedPokemonAttack" />
+          <NavigationProperty Name="PokemonAttacks" Relationship="Self.FK_PokemonAttack_Attack" FromRole="Attack" ToRole="PokemonAttack" />
+        </EntityType>
+        <EntityType Name="Found">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaxLevel" Type="Int32" Nullable="false" />
+          <Property Name="MinLevel" Type="Int32" Nullable="false" />
+          <Property Name="EncounterRate" Type="Decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="PokedexId" Type="Int32" Nullable="false" />
+          <Property Name="AreaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_Found_Area" FromRole="Found" ToRole="Area" />
+          <NavigationProperty Name="Pokedex" Relationship="Self.FK_Found_Pokedex" FromRole="Found" ToRole="Pokedex" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CatchRateMultiplier" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="SellPrice" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="BuyPrice" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="HealAmount" Type="Int32" />
+          <NavigationProperty Name="NpcItems" Relationship="Self.FK_NpcItem_Item" FromRole="Item" ToRole="NpcItem" />
+          <NavigationProperty Name="PlayerItems" Relationship="Self.FK_PlayerItem_Item" FromRole="Item" ToRole="PlayerItem" />
+        </EntityType>
+        <EntityType Name="Npc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dialog" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pokedollar" Type="Int32" />
+          <Property Name="AreaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_Npc_Area" FromRole="Npc" ToRole="Area" />
+          <NavigationProperty Name="NpcItems" Relationship="Self.FK_NpcItem_Npc" FromRole="Npc" ToRole="NpcItem" />
+          <NavigationProperty Name="TrainerPokemons" Relationship="Self.FK_TrainerPokemon_Npc" FromRole="Npc" ToRole="TrainerPokemon" />
+        </EntityType>
+        <EntityType Name="NpcItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="NpcId" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_NpcItem_Item" FromRole="NpcItem" ToRole="Item" />
+          <NavigationProperty Name="Npc" Relationship="Self.FK_NpcItem_Npc" FromRole="NpcItem" ToRole="Npc" />
+        </EntityType>
+        <EntityType Name="OwnedPokemonAttack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CurrentPp" Type="Int32" Nullable="false" />
+          <Property Name="PokemonId" Type="Int32" Nullable="false" />
+          <Property Name="AttackId" Type="Int32" Nullable="false" />
+          <Property Name="KnownAttack" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Attack" Relationship="Self.FK_OwnedPokemonAttack_Attack" FromRole="OwnedPokemonAttack" ToRole="Attack" />
+          <NavigationProperty Name="Pokemon" Relationship="Self.FK_OwnedPokemonAttack_Pokemon" FromRole="OwnedPokemonAttack" ToRole="Pokemon" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PlayedTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Pokedollar" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PlayerItems" Relationship="Self.FK_PlayerItem_Player" FromRole="Player" ToRole="PlayerItem" />
+          <NavigationProperty Name="PlayerPokedexes" Relationship="Self.FK_PlayerPokedex_Player" FromRole="Player" ToRole="PlayerPokedex" />
+          <NavigationProperty Name="PlayerPokemons" Relationship="Self.FK_PlayerPokemon_Player" FromRole="Player" ToRole="PlayerPokemon" />
+        </EntityType>
+        <EntityType Name="PlayerItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_PlayerItem_Item" FromRole="PlayerItem" ToRole="Item" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_PlayerItem_Player" FromRole="PlayerItem" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="PlayerPokedex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Encountered" Type="Boolean" Nullable="false" />
+          <Property Name="Caught" Type="Boolean" Nullable="false" />
+          <Property Name="PokedexId" Type="Int32" Nullable="false" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_PlayerPokedex_Player" FromRole="PlayerPokedex" ToRole="Player" />
+          <NavigationProperty Name="Pokedex" Relationship="Self.FK_PlayerPokedex_Pokedex" FromRole="PlayerPokedex" ToRole="Pokedex" />
+        </EntityType>
+        <EntityType Name="PlayerPokemon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Height" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Weight" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Xp" Type="Int32" Nullable="false" />
+          <Property Name="PokemonId" Type="Int32" Nullable="false" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="InParty" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_PlayerPokemon_Player" FromRole="PlayerPokemon" ToRole="Player" />
+          <NavigationProperty Name="Pokemon" Relationship="Self.FK_PlayerPokemon_Pokemon" FromRole="PlayerPokemon" ToRole="Pokemon" />
+        </EntityType>
+        <EntityType Name="Pokedex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PokedexEntry" Type="Int32" Nullable="false" />
+          <Property Name="AvgHeight" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="AvgWeight" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImgReference" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CatchRate" Type="Int32" Nullable="false" />
+          <Property Name="BaseExperience" Type="Int32" Nullable="false" />
+          <Property Name="EvolveLevel" Type="Int32" />
+          <Property Name="BaseHp" Type="Int32" Nullable="false" />
+          <Property Name="BaseAttack" Type="Int32" Nullable="false" />
+          <Property Name="BaseDefense" Type="Int32" Nullable="false" />
+          <Property Name="BaseSpecialAttack" Type="Int32" Nullable="false" />
+          <Property Name="BaseSpecialDefense" Type="Int32" Nullable="false" />
+          <Property Name="BaseSpeed" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Founds" Relationship="Self.FK_Found_Pokedex" FromRole="Pokedex" ToRole="Found" />
+          <NavigationProperty Name="PlayerPokedexes" Relationship="Self.FK_PlayerPokedex_Pokedex" FromRole="Pokedex" ToRole="PlayerPokedex" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_Pokedex_Type" FromRole="Pokedex" ToRole="Type" />
+          <NavigationProperty Name="Pokemons" Relationship="Self.FK_Pokemon_Pokedex" FromRole="Pokedex" ToRole="Pokemon" />
+          <NavigationProperty Name="PokemonAttacks" Relationship="Self.FK_PokemonAttack_Pokedex" FromRole="Pokedex" ToRole="PokemonAttack" />
+        </EntityType>
+        <EntityType Name="Pokemon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="Hp" Type="Int32" Nullable="false" />
+          <Property Name="CurrentHp" Type="Int32" Nullable="false" />
+          <Property Name="Attack" Type="Int32" Nullable="false" />
+          <Property Name="Defense" Type="Int32" Nullable="false" />
+          <Property Name="SpecialAttack" Type="Int32" Nullable="false" />
+          <Property Name="SpecialDefense" Type="Int32" Nullable="false" />
+          <Property Name="Speed" Type="Int32" Nullable="false" />
+          <Property Name="PokedexId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OwnedPokemonAttacks" Relationship="Self.FK_OwnedPokemonAttack_Pokemon" FromRole="Pokemon" ToRole="OwnedPokemonAttack" />
+          <NavigationProperty Name="PlayerPokemons" Relationship="Self.FK_PlayerPokemon_Pokemon" FromRole="Pokemon" ToRole="PlayerPokemon" />
+          <NavigationProperty Name="Pokedex" Relationship="Self.FK_Pokemon_Pokedex" FromRole="Pokemon" ToRole="Pokedex" />
+          <NavigationProperty Name="TrainerPokemons" Relationship="Self.FK_TrainerPokemon_Pokemon" FromRole="Pokemon" ToRole="TrainerPokemon" />
+        </EntityType>
+        <EntityType Name="PokemonAttack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequiredLevel" Type="Int32" Nullable="false" />
+          <Property Name="PokedexId" Type="Int32" Nullable="false" />
+          <Property Name="AttackId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Attack" Relationship="Self.FK_PokemonAttack_Attack" FromRole="PokemonAttack" ToRole="Attack" />
+          <NavigationProperty Name="Pokedex" Relationship="Self.FK_PokemonAttack_Pokedex" FromRole="PokemonAttack" ToRole="Pokedex" />
+        </EntityType>
+        <EntityType Name="TrainerPokemon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PokemonId" Type="Int32" Nullable="false" />
+          <Property Name="NpcId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Npc" Relationship="Self.FK_TrainerPokemon_Npc" FromRole="TrainerPokemon" ToRole="Npc" />
+          <NavigationProperty Name="Pokemon" Relationship="Self.FK_TrainerPokemon_Pokemon" FromRole="TrainerPokemon" ToRole="Pokemon" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TypeEffectiveId" Type="Int32" />
+          <Property Name="TypeNotEffectiveId" Type="Int32" />
+          <NavigationProperty Name="Attacks" Relationship="Self.FK_Attack_Type" FromRole="Type" ToRole="Attack" />
+          <NavigationProperty Name="Pokedexes" Relationship="Self.FK_Pokedex_Type" FromRole="Type" ToRole="Pokedex" />
+          <NavigationProperty Name="Type1" Relationship="Self.FK_TypeEffectiveId_Type" FromRole="Type" ToRole="Type1" />
+          <NavigationProperty Name="Type2" Relationship="Self.FK_TypeEffectiveId_Type" FromRole="Type1" ToRole="Type" />
+          <NavigationProperty Name="Type11" Relationship="Self.FK_TypeNotEffectiveId_Type" FromRole="Type" ToRole="Type1" />
+          <NavigationProperty Name="Type3" Relationship="Self.FK_TypeNotEffectiveId_Type" FromRole="Type1" ToRole="Type" />
+        </EntityType>
+        <Association Name="FK_Found_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Found" Type="Self.Found" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Found">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Npc_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Npc" Type="Self.Npc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Npc">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attack_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Attack" Type="Self.Attack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attack">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OwnedPokemonAttack_Attack">
+          <End Role="Attack" Type="Self.Attack" Multiplicity="1" />
+          <End Role="OwnedPokemonAttack" Type="Self.OwnedPokemonAttack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attack">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OwnedPokemonAttack">
+              <PropertyRef Name="AttackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PokemonAttack_Attack">
+          <End Role="Attack" Type="Self.Attack" Multiplicity="1" />
+          <End Role="PokemonAttack" Type="Self.PokemonAttack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attack">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PokemonAttack">
+              <PropertyRef Name="AttackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Found_Pokedex">
+          <End Role="Pokedex" Type="Self.Pokedex" Multiplicity="1" />
+          <End Role="Found" Type="Self.Found" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokedex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Found">
+              <PropertyRef Name="PokedexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NpcItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="NpcItem" Type="Self.NpcItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NpcItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="PlayerItem" Type="Self.PlayerItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NpcItem_Npc">
+          <End Role="Npc" Type="Self.Npc" Multiplicity="1" />
+          <End Role="NpcItem" Type="Self.NpcItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Npc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NpcItem">
+              <PropertyRef Name="NpcId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrainerPokemon_Npc">
+          <End Role="Npc" Type="Self.Npc" Multiplicity="1" />
+          <End Role="TrainerPokemon" Type="Self.TrainerPokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Npc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TrainerPokemon">
+              <PropertyRef Name="NpcId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OwnedPokemonAttack_Pokemon">
+          <End Role="Pokemon" Type="Self.Pokemon" Multiplicity="1" />
+          <End Role="OwnedPokemonAttack" Type="Self.OwnedPokemonAttack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokemon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OwnedPokemonAttack">
+              <PropertyRef Name="PokemonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerItem_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="PlayerItem" Type="Self.PlayerItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerItem">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerPokedex_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="PlayerPokedex" Type="Self.PlayerPokedex" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerPokedex">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerPokemon_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="PlayerPokemon" Type="Self.PlayerPokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerPokemon">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerPokedex_Pokedex">
+          <End Role="Pokedex" Type="Self.Pokedex" Multiplicity="1" />
+          <End Role="PlayerPokedex" Type="Self.PlayerPokedex" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokedex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerPokedex">
+              <PropertyRef Name="PokedexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerPokemon_Pokemon">
+          <End Role="Pokemon" Type="Self.Pokemon" Multiplicity="1" />
+          <End Role="PlayerPokemon" Type="Self.PlayerPokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokemon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerPokemon">
+              <PropertyRef Name="PokemonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pokedex_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Pokedex" Type="Self.Pokedex" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pokedex">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pokemon_Pokedex">
+          <End Role="Pokedex" Type="Self.Pokedex" Multiplicity="1" />
+          <End Role="Pokemon" Type="Self.Pokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokedex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pokemon">
+              <PropertyRef Name="PokedexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PokemonAttack_Pokedex">
+          <End Role="Pokedex" Type="Self.Pokedex" Multiplicity="1" />
+          <End Role="PokemonAttack" Type="Self.PokemonAttack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokedex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PokemonAttack">
+              <PropertyRef Name="PokedexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrainerPokemon_Pokemon">
+          <End Role="Pokemon" Type="Self.Pokemon" Multiplicity="1" />
+          <End Role="TrainerPokemon" Type="Self.TrainerPokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokemon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TrainerPokemon">
+              <PropertyRef Name="PokemonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeEffectiveId_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Type1" Type="Self.Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Type1">
+              <PropertyRef Name="TypeEffectiveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeNotEffectiveId_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Type1" Type="Self.Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Type1">
+              <PropertyRef Name="TypeNotEffectiveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Project_Pokemon_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Areas" EntityType="Self.Area" />
+          <EntitySet Name="Attacks" EntityType="Self.Attack" />
+          <EntitySet Name="Founds" EntityType="Self.Found" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="Npcs" EntityType="Self.Npc" />
+          <EntitySet Name="NpcItems" EntityType="Self.NpcItem" />
+          <EntitySet Name="OwnedPokemonAttacks" EntityType="Self.OwnedPokemonAttack" />
+          <EntitySet Name="Players" EntityType="Self.Player" />
+          <EntitySet Name="PlayerItems" EntityType="Self.PlayerItem" />
+          <EntitySet Name="PlayerPokedexes" EntityType="Self.PlayerPokedex" />
+          <EntitySet Name="PlayerPokemons" EntityType="Self.PlayerPokemon" />
+          <EntitySet Name="Pokedexes" EntityType="Self.Pokedex" />
+          <EntitySet Name="Pokemons" EntityType="Self.Pokemon" />
+          <EntitySet Name="PokemonAttacks" EntityType="Self.PokemonAttack" />
+          <EntitySet Name="TrainerPokemons" EntityType="Self.TrainerPokemon" />
+          <EntitySet Name="Types" EntityType="Self.Type" />
+          <AssociationSet Name="FK_Found_Area" Association="Self.FK_Found_Area">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="Found" EntitySet="Founds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Npc_Area" Association="Self.FK_Npc_Area">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="Npc" EntitySet="Npcs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attack_Type" Association="Self.FK_Attack_Type">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="Attack" EntitySet="Attacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OwnedPokemonAttack_Attack" Association="Self.FK_OwnedPokemonAttack_Attack">
+            <End Role="Attack" EntitySet="Attacks" />
+            <End Role="OwnedPokemonAttack" EntitySet="OwnedPokemonAttacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PokemonAttack_Attack" Association="Self.FK_PokemonAttack_Attack">
+            <End Role="Attack" EntitySet="Attacks" />
+            <End Role="PokemonAttack" EntitySet="PokemonAttacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Found_Pokedex" Association="Self.FK_Found_Pokedex">
+            <End Role="Pokedex" EntitySet="Pokedexes" />
+            <End Role="Found" EntitySet="Founds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NpcItem_Item" Association="Self.FK_NpcItem_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="NpcItem" EntitySet="NpcItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerItem_Item" Association="Self.FK_PlayerItem_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="PlayerItem" EntitySet="PlayerItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NpcItem_Npc" Association="Self.FK_NpcItem_Npc">
+            <End Role="Npc" EntitySet="Npcs" />
+            <End Role="NpcItem" EntitySet="NpcItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrainerPokemon_Npc" Association="Self.FK_TrainerPokemon_Npc">
+            <End Role="Npc" EntitySet="Npcs" />
+            <End Role="TrainerPokemon" EntitySet="TrainerPokemons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OwnedPokemonAttack_Pokemon" Association="Self.FK_OwnedPokemonAttack_Pokemon">
+            <End Role="Pokemon" EntitySet="Pokemons" />
+            <End Role="OwnedPokemonAttack" EntitySet="OwnedPokemonAttacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerItem_Player" Association="Self.FK_PlayerItem_Player">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="PlayerItem" EntitySet="PlayerItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerPokedex_Player" Association="Self.FK_PlayerPokedex_Player">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="PlayerPokedex" EntitySet="PlayerPokedexes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerPokemon_Player" Association="Self.FK_PlayerPokemon_Player">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="PlayerPokemon" EntitySet="PlayerPokemons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerPokedex_Pokedex" Association="Self.FK_PlayerPokedex_Pokedex">
+            <End Role="Pokedex" EntitySet="Pokedexes" />
+            <End Role="PlayerPokedex" EntitySet="PlayerPokedexes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerPokemon_Pokemon" Association="Self.FK_PlayerPokemon_Pokemon">
+            <End Role="Pokemon" EntitySet="Pokemons" />
+            <End Role="PlayerPokemon" EntitySet="PlayerPokemons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pokedex_Type" Association="Self.FK_Pokedex_Type">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="Pokedex" EntitySet="Pokedexes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pokemon_Pokedex" Association="Self.FK_Pokemon_Pokedex">
+            <End Role="Pokedex" EntitySet="Pokedexes" />
+            <End Role="Pokemon" EntitySet="Pokemons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PokemonAttack_Pokedex" Association="Self.FK_PokemonAttack_Pokedex">
+            <End Role="Pokedex" EntitySet="Pokedexes" />
+            <End Role="PokemonAttack" EntitySet="PokemonAttacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrainerPokemon_Pokemon" Association="Self.FK_TrainerPokemon_Pokemon">
+            <End Role="Pokemon" EntitySet="Pokemons" />
+            <End Role="TrainerPokemon" EntitySet="TrainerPokemons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeEffectiveId_Type" Association="Self.FK_TypeEffectiveId_Type">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="Type1" EntitySet="Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeNotEffectiveId_Type" Association="Self.FK_TypeNotEffectiveId_Type">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="Type1" EntitySet="Types" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Project_Pokemon_ModelStoreContainer" CdmEntityContainer="Project_Pokemon_Entities">
+          <EntitySetMapping Name="Areas">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attacks">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.Attack">
+              <MappingFragment StoreEntitySet="Attack">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BaseDamage" ColumnName="BaseDamage" />
+                <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
+                <ScalarProperty Name="Pp" ColumnName="Pp" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Founds">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.Found">
+              <MappingFragment StoreEntitySet="Found">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaxLevel" ColumnName="MaxLevel" />
+                <ScalarProperty Name="MinLevel" ColumnName="MinLevel" />
+                <ScalarProperty Name="EncounterRate" ColumnName="EncounterRate" />
+                <ScalarProperty Name="PokedexId" ColumnName="PokedexId" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CatchRateMultiplier" ColumnName="CatchRateMultiplier" />
+                <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
+                <ScalarProperty Name="BuyPrice" ColumnName="BuyPrice" />
+                <ScalarProperty Name="HealAmount" ColumnName="HealAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Npcs">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.Npc">
+              <MappingFragment StoreEntitySet="Npc">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Dialog" ColumnName="Dialog" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Pokedollar" ColumnName="Pokedollar" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NpcItems">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.NpcItem">
+              <MappingFragment StoreEntitySet="NpcItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="NpcId" ColumnName="NpcId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OwnedPokemonAttacks">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.OwnedPokemonAttack">
+              <MappingFragment StoreEntitySet="OwnedPokemonAttack">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CurrentPp" ColumnName="CurrentPp" />
+                <ScalarProperty Name="PokemonId" ColumnName="PokemonId" />
+                <ScalarProperty Name="AttackId" ColumnName="AttackId" />
+                <ScalarProperty Name="KnownAttack" ColumnName="KnownAttack" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PlayedTime" ColumnName="PlayedTime" />
+                <ScalarProperty Name="Pokedollar" ColumnName="Pokedollar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerItems">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.PlayerItem">
+              <MappingFragment StoreEntitySet="PlayerItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerPokedexes">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.PlayerPokedex">
+              <MappingFragment StoreEntitySet="PlayerPokedex">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Encountered" ColumnName="Encountered" />
+                <ScalarProperty Name="Caught" ColumnName="Caught" />
+                <ScalarProperty Name="PokedexId" ColumnName="PokedexId" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerPokemons">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.PlayerPokemon">
+              <MappingFragment StoreEntitySet="PlayerPokemon">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Xp" ColumnName="Xp" />
+                <ScalarProperty Name="PokemonId" ColumnName="PokemonId" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="InParty" ColumnName="InParty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pokedexes">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.Pokedex">
+              <MappingFragment StoreEntitySet="Pokedex">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PokedexEntry" ColumnName="PokedexEntry" />
+                <ScalarProperty Name="AvgHeight" ColumnName="AvgHeight" />
+                <ScalarProperty Name="AvgWeight" ColumnName="AvgWeight" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ImgReference" ColumnName="ImgReference" />
+                <ScalarProperty Name="CatchRate" ColumnName="CatchRate" />
+                <ScalarProperty Name="BaseExperience" ColumnName="BaseExperience" />
+                <ScalarProperty Name="EvolveLevel" ColumnName="EvolveLevel" />
+                <ScalarProperty Name="BaseHp" ColumnName="BaseHp" />
+                <ScalarProperty Name="BaseAttack" ColumnName="BaseAttack" />
+                <ScalarProperty Name="BaseDefense" ColumnName="BaseDefense" />
+                <ScalarProperty Name="BaseSpecialAttack" ColumnName="BaseSpecialAttack" />
+                <ScalarProperty Name="BaseSpecialDefense" ColumnName="BaseSpecialDefense" />
+                <ScalarProperty Name="BaseSpeed" ColumnName="BaseSpeed" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pokemons">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.Pokemon">
+              <MappingFragment StoreEntitySet="Pokemon">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Hp" ColumnName="Hp" />
+                <ScalarProperty Name="CurrentHp" ColumnName="CurrentHp" />
+                <ScalarProperty Name="Attack" ColumnName="Attack" />
+                <ScalarProperty Name="Defense" ColumnName="Defense" />
+                <ScalarProperty Name="SpecialAttack" ColumnName="SpecialAttack" />
+                <ScalarProperty Name="SpecialDefense" ColumnName="SpecialDefense" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="PokedexId" ColumnName="PokedexId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PokemonAttacks">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.PokemonAttack">
+              <MappingFragment StoreEntitySet="PokemonAttack">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RequiredLevel" ColumnName="RequiredLevel" />
+                <ScalarProperty Name="PokedexId" ColumnName="PokedexId" />
+                <ScalarProperty Name="AttackId" ColumnName="AttackId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrainerPokemons">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.TrainerPokemon">
+              <MappingFragment StoreEntitySet="TrainerPokemon">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PokemonId" ColumnName="PokemonId" />
+                <ScalarProperty Name="NpcId" ColumnName="NpcId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="Project_Pokemon_Model.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TypeEffectiveId" ColumnName="TypeEffectiveId" />
+                <ScalarProperty Name="TypeNotEffectiveId" ColumnName="TypeNotEffectiveId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

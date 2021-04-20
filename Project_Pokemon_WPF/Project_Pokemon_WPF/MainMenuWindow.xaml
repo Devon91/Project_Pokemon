@@ -1,0 +1,188 @@
+﻿<Window x:Class="Project_Pokemon_WPF.MainMenuWindow"
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_Pokemon_WPF"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="MainMenu" Height="600" Width="1000" Loaded="Window_Loaded" ResizeMode="CanMinimize" Closed="Window_Closed">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        
+        <!--row 1: Top menu-->
+        <materialDesign:ColorZone
+              Mode="PrimaryDark"
+              Padding="15" Grid.ColumnSpan="3" 
+              materialDesign:ShadowAssist.ShadowDepth="Depth2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Foreground="WhiteSmoke" Visibility="Hidden"
+                    Width="auto" Margin="0"  Grid.Column="0" Grid.Row="0"
+                    
+                    x:Name="btnPrevious" Click="BtnPrevious_Click">
+
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="MenuLeftOutline" VerticalAlignment="Bottom"/>
+                            <TextBlock Text="previous area" FontSize="16"/>
+                        </StackPanel>
+                    </Button.Content>
+
+                </Button>
+
+                <TextBlock x:Name="txtArea" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Text="Route 1" FontSize="32" Foreground="WhiteSmoke"/>
+
+                <Button
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Width="auto" Margin="0"  Grid.Column="2" Grid.Row="0"
+                    Foreground="WhiteSmoke"
+                    x:Name="btnNext" Click="BtnNext_Click">
+
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="next area" FontSize="16"/>
+                            <materialDesign:PackIcon Kind="MenuRightOutline" VerticalAlignment="Bottom"/>
+                        </StackPanel>
+                    </Button.Content>
+
+                </Button>
+            </Grid>
+        </materialDesign:ColorZone>
+
+        
+        <!--row 2 Area Action buttons-->
+
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Margin="120 20">
+
+            <Button
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Width="auto" Height="40" Margin="15" 
+                x:Name="btnWild" Click="BtnWild_Click" >
+                
+                <Button.Content >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="WILD BATTLE  "/>
+                        <materialDesign:PackIcon Kind="SwordCross"/>
+                    </StackPanel>
+                </Button.Content>
+
+            </Button>
+
+            <Button
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Width="auto" Margin="15" Height="40"
+                x:Name="btnTrainer" Click="BtnTrainer_Click">
+                
+                <Button.Content >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="TRAINER BATTLE  "/>
+                        <materialDesign:PackIcon Kind="SwordCross"/>
+                    </StackPanel>
+                </Button.Content>
+                
+            </Button>
+
+            <Button
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Width="auto" Margin="15" Height="40" Click="btnGym_Click"
+                x:Name="btnGym"> 
+                
+                <Button.Content >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="GYM BATTLE  "/>
+                        <materialDesign:PackIcon Kind="SwordCross"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            Width="auto" Margin="15" Height="40"
+            x:Name="btnPokemMart"
+            Click="BtnPokemMart_Click">
+
+
+                <Button.Content >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="POKÉ MART  "/>
+                        <materialDesign:PackIcon Kind="Cart"/>
+                    </StackPanel>
+                </Button.Content>
+
+            </Button>
+
+            <Button
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            Width="auto" Margin="15"  Height="40"
+            x:Name="btnPokeCenter" Click="btnPokeCenter_Click" >
+
+
+                <Button.Content >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="POKÉMON CENTER  "/>
+                        <materialDesign:PackIcon Kind="HospitalBox"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+        </StackPanel>
+        
+        <!--row 3 Player menu's buttons + quit button -->
+        <Grid Grid.Row="2" Grid.ColumnSpan="3" Margin="40 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            Width="auto" Margin="10" Grid.Column="0"
+            x:Name="btnPokedex" Click="BtnPokedex_Click" Content="Pokedex"/>
+
+            <Button
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            Width="auto" Margin="10"  Grid.Column="1"
+            x:Name="btnParty"  Click="BtnParty_Click"  Content="Pokemon Party"/>
+
+            <Button
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            Width="auto" Margin="10"  Grid.Column="2"
+            x:Name="btnInventory" Click="BtnInventory_Click" Content="Inventory"/>
+
+            <Button
+            Style="{StaticResource MaterialDesignRaisedAccentButton}"
+            Width="auto" Margin="10"  Grid.Column="3"
+            x:Name="btnQuit" Click="BtnQuit_Click" Content="Quit"/>
+        </Grid>
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,77 @@
+﻿<Window x:Class="Project_Pokemon_WPF.PokemonPartyWindow"
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_Pokemon_WPF"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Pokemon_Party" Height="600" Width="1000" ResizeMode="CanMinimize" Loaded="Window_Loaded">
+    <Grid RenderTransformOrigin="0.5,0.5">
+        <Grid.Background>
+            <ImageBrush ImageSource="images/pokeballBackground.png" Opacity="0.05" AlignmentX="Left" Stretch="Uniform" TileMode="Tile" Viewport="0,0,1,2">
+                <ImageBrush.Transform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.1" ScaleY="0.1" CenterX="20" CenterY="20"/>
+                        <SkewTransform CenterX="0" CenterY="0"/>
+                        <RotateTransform Angle="-45" CenterX="20" CenterY="20"/>
+                        <TranslateTransform Y="0"/>
+                    </TransformGroup>
+                </ImageBrush.Transform>
+            </ImageBrush>
+        </Grid.Background>
+
+        <materialDesign:Card
+                materialDesign:ShadowAssist.ShadowDepth="Depth1" Width="750" Height="450">
+            <Grid>
+
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <materialDesign:ColorZone
+              Mode="PrimaryMid"
+              Padding="15" Grid.ColumnSpan="3" 
+              materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    <Label FontSize="20" Name="lblPokemon" Content="Pokemon Party" Foreground="WhiteSmoke"/>
+                </materialDesign:ColorZone>
+
+                <DataGrid x:Name="datagridParty" Grid.Row="1"  AutoGenerateColumns="False" Margin="10" 
+            IsReadOnly="True" Background="White">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Level" Binding="{Binding Pokemon.Level}" Width="100"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="300" />
+                        <DataGridTextColumn Header="HP" Binding="{Binding Pokemon.CurrentHp}" Width="100" />
+                        <DataGridTextColumn Header="Max HP" Binding="{Binding Pokemon.CalculatedMaxHP}" Width="100"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Pokemon.Fainted}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
+                    <Button x:Name="btnCancel" FontSize="15" Content="Cancel" Margin="10" Click="BtnCancel_Click" Width="160" />
+                    <Button x:Name="btnChangePokemon" Content="Change pokemon" Width="160" Margin="10" Click="BtnChangePokemon_Click"/>
+                    <Button x:Name="btnAttackSwap" FontSize="15" Content="Change Attacks" Margin="10" Click="BtnAttackSwap_Click" Width="160"/>
+                    <Button x:Name="btnFirstPokemon" FontSize="15" Content="Start Battle" Margin="10" Click="BtnFirstPokemon_Click"  Width="160"/>
+                    <!--<Button x:Name="btnConfirm" FontSize="15" Content="Confirm" Margin="10" Width="160"/>-->
+                </StackPanel>
+
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Window>

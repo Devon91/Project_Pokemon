@@ -1,0 +1,224 @@
+﻿<Window x:Class="Project_Pokemon_WPF.TrainerBattleWindow"
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_Pokemon_WPF"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="TrainerBattleWindow" Height="610" Width="1000" ResizeMode="CanMinimize" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+
+        <!--speler kant, links-->
+        <Label x:Name="lblPlayerName" FontSize="18" Content="Ash" FontWeight="Bold" Margin="6"/>
+
+        <Label x:Name="lblPlayerPokemon" FontSize="18" Content="Bulbasaur lvl 5"
+               Grid.Row="1" Margin="5"/>
+
+        <!--player pokemon health-->
+        <ProgressBar  x:Name="pbHpPlayerPokemon" Value="100" 
+              Height="10" Grid.Row="2" Margin="10 0 50 0" Width="auto"
+              Foreground="#FF38EC38" Background="#FFE6EAEE" BorderThickness="1" BorderBrush="#FFB9B9B9" />
+
+        <Grid Grid.Column="0" Width="auto" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="lblHpPlayer" FontSize="14"  Content="HP: 75/75"
+                   Grid.Column="0"  Margin="6"/>
+            <!--pokemon xp-->
+            <Label x:Name="lblXp" FontSize="14"  Content="XP" 
+                   Grid.Column="1"  Margin="6 5 0 5" HorizontalAlignment="Right"/>
+
+            <ProgressBar x:Name="pbXpPlayerPokemon" Value="66"
+               Grid.Column="2"  Height="5" Width="auto" VerticalAlignment="Center" Margin="5 5 50 10"/>
+
+        </Grid>
+
+
+
+        <!--tegenstander zijde, rechts-->
+        <Label x:Name="lblEnemyName" FontSize="18" FontWeight="Bold" Content="Misty" 
+               Grid.Column="1" HorizontalAlignment="Right" Margin="6"/>
+
+        <Label x:Name="lblEnemyPokemon" FontSize="18" Content="Squirtle lvl 5"
+               Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="6"/>
+
+        <!--Enemy pokemon health-->
+        <ProgressBar  x:Name="pbHpEnemyPokemon" Value="100" 
+              Height="10" Grid.Column="1" Grid.Row="2" Margin="50 0 10 0" Width="auto"
+              Foreground="#FF38EC38" Background="#FFE6EAEE" BorderThickness="1" BorderBrush="#FFB9B9B9" />
+
+        <Label x:Name="lblHpEnemy" FontSize="14" Content="HP: 75/75"
+               Grid.Column="1" Grid.Row="3" Margin="6" HorizontalAlignment="Right"/>
+
+
+
+
+
+        <!--image player pokemon-->
+        <Grid Grid.Row="4" Grid.Column="0" Grid.RowSpan="2">
+            <Grid.Background>
+                <ImageBrush ImageSource="images/battlebackgroundshadow3.jpg"/>
+            </Grid.Background>
+            <Image x:Name="imgPlayerPokemon" Stretch="Fill" VerticalAlignment="Top"
+                   Margin="0 5" Width="192" Height="192" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Collapsed"
+              Content="{materialDesign:PackIcon ArrowBack}" x:Name="btnBack" Click="BtnBack_Click"
+              Margin="18 12" Height="28" materialDesign:ButtonAssist.CornerRadius="5"/>
+        </Grid>
+        
+        <!--image enemy pokemon-->
+        <Grid Grid.Row="4" Grid.Column="1" Grid.RowSpan="2">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="1"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Grid.Background>
+                <ImageBrush ImageSource="images/battlebackgroundshadow3_mirror.jpg">
+                    <ImageBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </Grid.Background>
+            
+            <Image x:Name="imgEnemyPokemon" Stretch="Fill" VerticalAlignment="Top"
+                Width="192" Height="192" Margin="0 5" />
+
+            <Button x:Name="btnEnemyTurn" Click="BtnEnemyTurn_Click" Content="Enemy turn"
+            Style="{StaticResource MaterialDesignRaisedAccentButton}"
+            Width="auto" VerticalAlignment="Bottom" Margin="14 12"/>
+
+            <Button x:Name="btnEnemyNextPokemon" Click="BtnEnemyNextPokemon_Click" Content="Next Pokemon"
+            Style="{StaticResource MaterialDesignRaisedAccentButton}"
+            Width="auto" VerticalAlignment="Bottom" Margin="14 10" Visibility="Collapsed"/>
+        </Grid>
+
+        
+
+        <!--Action bar onderaan-->
+        <materialDesign:ColorZone
+          Mode="PrimaryMid"
+          VerticalAlignment="Stretch"
+          Grid.Row="6" Grid.ColumnSpan="2" Height="auto"
+          Padding="10">
+            <Grid Margin="0 0 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!--menu buttons, initieel visible-->
+                <Button x:Name="btnFight" Content="Fight" Click="BtnFight_Click"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="5"
+                    Width="auto" Margin="8 10 15 10"  VerticalAlignment="Bottom"/>
+
+                <Button x:Name="btnPokemon" Content="Pokemon" Click="BtnPokemon_Click"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="5"
+                    Grid.Column="1" Width="auto" Margin="8 10 15 10" VerticalAlignment="Bottom"/>
+
+                <Button x:Name="btnBag" Click="BtnBag_Click"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="5" 
+                    Grid.Row="1" Width="auto" Margin="8 10 15 10" Content="Bag" VerticalAlignment="center"/>
+
+                <Button x:Name="btnRun" Content="Run" Click="BtnRun_Click" IsEnabled="False"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="5" 
+                    Grid.Row="1" Grid.Column="1" Width="auto" Margin="8 10 15 10" VerticalAlignment="center"/>
+
+                <!--aanval buttons, initieel collapsed-->
+                <Button x:Name="btnAttack1" Content="attack 1" Click="BtnAttack1_Click"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="5"
+                    Visibility="Collapsed" VerticalAlignment="Bottom"
+                    Width="auto" Margin="8 10 15 10" ToolTip="pp" />
+
+                <Button x:Name="btnAttack2" Content="attack 2" Click="BtnAttack2_Click"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="5"
+                    Visibility="Collapsed"  VerticalAlignment="Bottom"
+                    Grid.Column="1" Width="auto" Margin="8 10 15 10"/>
+
+                <Button x:Name="btnAttack3" Content="attack 3" Click="BtnAttack3_Click"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="5" 
+                    Visibility="Collapsed" VerticalAlignment="Top"
+                    Grid.Row="1" Width="auto" Margin="8 10 15 10" />
+
+                <Button x:Name="btnAttack4" Content="attack 4" Click="Btnattack4_Click"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="5"
+                    Visibility="Collapsed" VerticalAlignment="Top"
+                    Grid.Row="1" Grid.Column="1" Width="auto" Margin="8 10 15 10"/>
+
+                <ScrollViewer Grid.Column="2" Grid.RowSpan="2" Margin="14 7 4 7">
+                    <TextBlock x:Name="txtInformation"  FontSize="14.5" TextWrapping="Wrap"
+                    Background="WhiteSmoke" Foreground="Black" Padding="10" Text="{Binding Path=CombatText}"/>
+                </ScrollViewer>
+            </Grid>
+        </materialDesign:ColorZone>
+
+        <!--<Button
+          Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+          HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="22" 
+             Grid.Row="6" Margin="5">
+            <materialDesign:PackIcon Kind="ArrowLeftCircleOutline" Foreground="WhiteSmoke"
+                Height="14" Width="14" />
+
+        </Button>-->
+        
+    </Grid>
+</Window>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b9013ae0f2d64ac691ca072c69b6afad" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="Project_Pokemon_Model.Area" Width="1.5" PointX="3" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.Attack" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.Found" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.Item" Width="1.5" PointX="6" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.Npc" Width="1.5" PointX="8.25" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.NpcItem" Width="1.5" PointX="10.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.OwnedPokemonAttack" Width="1.5" PointX="7.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.Player" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.PlayerItem" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.PlayerPokedex" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.PlayerPokemon" Width="1.5" PointX="7.5" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.Pokedex" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.Pokemon" Width="1.5" PointX="5.25" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.PokemonAttack" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.TrainerPokemon" Width="1.5" PointX="10.5" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_Pokemon_Model.Type" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_Found_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_Npc_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_Attack_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_OwnedPokemonAttack_Attack" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_PokemonAttack_Attack" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_Found_Pokedex" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_NpcItem_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_PlayerItem_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_NpcItem_Npc" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_TrainerPokemon_Npc" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_OwnedPokemonAttack_Pokemon" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_PlayerItem_Player" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_PlayerPokedex_Player" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_PlayerPokemon_Player" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_PlayerPokedex_Pokedex" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_PlayerPokemon_Pokemon" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_Pokedex_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_Pokemon_Pokedex" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_PokemonAttack_Pokedex" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_TrainerPokemon_Pokemon" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_TypeEffectiveId_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_Pokemon_Model.FK_TypeNotEffectiveId_Type" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
